@@ -15,3 +15,21 @@ As consultas também têm sido registradas em planilhas, com data e hora de real
 Deseja-se ainda informatizar a receita do médico, de maneira que, no encerramento da consulta, ele possa registrar os medicamentos receitados, a quantidade e as instruções de uso. A partir disso, espera-se que o sistema imprima um relatório da receita ao paciente ou permita sua visualização via internet.
 
 ![alt text](Hospital.png)
+
+#
+ # Os Segredos do Hospital (Parte 2)
+
+Após a primeira versão do projeto de banco de dados para o sistema hospitalar, notou-se a necessidade de expansão das funcionalidades, incluindo alguns requisitos essenciais a essa versão do software. As funcionalidades em questão são para o controle na internação de pacientes.
+
+No hospital, as internações têm sido registradas por meio de formulários eletrônicos que gravam os dados em arquivos. 
+
+Para cada internação, são anotadas a data de entrada, a data prevista de alta e a data efetiva de alta, além da descrição textual dos procedimentos a serem realizados. 
+
+As internações precisam ser vinculadas a quartos, com a numeração e o tipo. 
+
+Cada tipo de quarto tem sua descrição e o seu valor diário (a princípio, o hospital trabalha com apartamentos, quartos duplos e enfermaria).
+
+Também é necessário controlar quais profissionais de enfermaria estarão responsáveis por acompanhar o paciente durante sua internação. Para cada enfermeiro(a), é necessário nome, CPF e registro no conselho de enfermagem (CRE).
+
+![Hospital2 png](https://github.com/LuisHenriBispo/O-Hospital-Fundamental/assets/125465521/c0b6d451-89e3-43ed-b870-c14f714bf062)
+
