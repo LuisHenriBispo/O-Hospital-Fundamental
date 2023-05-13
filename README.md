@@ -31,5 +31,7 @@ Cada tipo de quarto tem sua descrição e o seu valor diário (a princípio, o h
 
 Também é necessário controlar quais profissionais de enfermaria estarão responsáveis por acompanhar o paciente durante sua internação. Para cada enfermeiro(a), é necessário nome, CPF e registro no conselho de enfermagem (CRE).
 
-![Hospital2 png](https://github.com/LuisHenriBispo/O-Hospital-Fundamental/assets/125465521/c0b6d451-89e3-43ed-b870-c14f714bf062)
+![alt text](Hospital2.png)
+
+
 
