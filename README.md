@@ -72,8 +72,8 @@ Crie um script que adicione uma coluna “em_atividade” para os médicos, indi
 
 Crie um script para atualizar ao menos dois médicos como inativos e os demais em atividade.
 
--- Adicionar coluna "em_atividade" na tabela de médicos
-ALTER TABLE medicos ADD COLUMN em_atividade VARCHAR(20);
+-- Adicionar coluna "em_atividade" na tabela de médicos</br>
+ALTER TABLE medicos ADD COLUMN em_atividade VARCHAR(20);</br>
 
 -- Atualizar o status dos médicos como "ativo" ou "inativo"</br>
 UPDATE medicos SET em_atividade = 'ativo' WHERE tipo_medico_id = 2;</br>
