@@ -83,4 +83,87 @@ UPDATE medicos SET em_atividade = 'ativo' WHERE tipo_medico_id = 3;</br>
 -- Selecionar todos os registros da tabela tipo_medico</br>
 SELECT * FROM tipo_medico;
 
+#
+ # As Relíquias dos Dados (Parte 5)
+
+Crie um script e nele inclua consultas que retornem:
+
+1. Todos os dados e o valor médio das consultas do ano de 2020 e das que foram feitas sob convênio.
+SELECT *</br> 
+FROM consultas</br>
+WHERE YEAR(data_consulta) = 2020</br>
+OR convenio = 'Sim';</br>
+SELECT AVG(valor_consulta) AS valor_medio</br>
+FROM consultas</br>
+WHERE YEAR(data_consulta) = 2020</br>
+OR convenio = 'Sim';</br>
+   
+2. Todos os dados das internações que tiveram data de alta maior que a data prevista para a alta.   
+SELECT **</br> 
+FROM internacoes*</br> 
+WHERE data_alta > data_prevista_alta;*</br>
+
+3. Receituário completo da primeira consulta registrada com receituário associado.
+SELECT *</br>
+FROM receituarios</br>
+WHERE consulta_id = (</br>
+SELECT MIN(id)<br>
+FROM consultas</br>
+WHERE consulta_id IS NOT NULL
+)
+
+4. Todos os dados da consulta de maior valor e também da de menor valor (ambas as consultas não foram realizadas sob convênio).</br>
+SELECT consulta.*, MAX(consulta.valor_consulta) AS max_valor_consulta, MIN(consulta.valor_consulta) AS min_valor_consulta</br> 
+FROM consulta</br> 
+INNER JOIN paciente ON consulta.paciente_id = paciente.id</br> 
+WHERE paciente.convenio_id IS NULL</br> 
+GROUP BY consulta.id;
+
+5. Todos os dados das internações em seus respectivos quartos, calculando o total da internação a partir do valor de diária do quarto e o número de dias entre a entrada e a alta.</br>
+SELECT internacoes.*, quartos.valor_diaria, DATEDIFF(internacoes.data_alta, internacoes.data_entrada) AS dias_internacao, quartos.valor_diaria * DATEDIFF(internacoes.data_alta, internacoes.data_entrada) AS total_internacao</br>
+FROM internacoes</br>
+JOIN quartos ON internacoes.quarto_id = quartos.id</br>
+
+6. Data, procedimento e número de quarto de internações em quartos do tipo “apartamento”.</br>
+select internacao.id, internacao.data_entrada, internacao.descricao_procedimento, quarto.numero</br> 
+from internacao</br>
+inner join quarto</br> 
+on quarto.id = internacao.quarto_id where quarto.id = 1;</br>
+
+7. Nome do paciente, data da consulta e especialidade de todas as consultas em que os pacientes eram menores de 18 anos na data da consulta e cuja especialidade não seja “pediatria”, ordenando por data de realização da consulta.</br>
+SELECT consultas.nome_paciente, consultas.data_consulta, consultas.especialidade</br>
+FROM consultas</br>
+WHERE DATEDIFF(NOW(), consultas.data_nascimento_paciente) < 6570 -- Menor de 18 anos (6570 dias</br>)
+AND consultas.especialidade != 'pediatria'</br>
+ORDER BY consultas.data_consulta;</br>
+
+8. Nome do paciente, nome do médico, data da internação e procedimentos das internações realizadas por médicos da especialidade “gastroenterologia”, que tenham acontecido em “enfermaria”.</br>
+SELECT pacientes.nome AS nome_paciente, medicos.nome AS nome_medico, internacoes.data_internacao, internacoes.procedimentos</br>
+FROM internacoes</br>
+JOIN medicos ON internacoes.medico_id = medicos.id</br>
+JOIN pacientes ON internacoes.paciente_id = pacientes.id</br>
+WHERE medicos.especialidade = 'gastroenterologia'</br>
+AND internacoes.local_internacao = 'enfermaria';</br>
+
+9. Os nomes dos médicos, seus CRMs e a quantidade de consultas que cada um realizou.</br>
+SELECT medicos.nome AS nome_medico, medicos.crm, COUNT(consultas.id) AS quantidade_consultas</br>
+FROM medicos</br>
+JOIN consultas ON medicos.id = consultas.medico_id</br>
+GROUP BY medicos.id;</br>
+
+10. Todos os médicos que tenham "Gabriel" no nome</br>
+SELECT *
+FROM medicos
+WHERE nome LIKE '%Gabriel%';
+
+11. Os nomes, CREs e número de internações de enfermeiros que participaram de mais de uma internação.</br>
+SELECT e.nome, e.CRE, COUNT(*) AS num_internacoes</br>
+FROM enfermeiros e</br>
+JOIN internacoes i ON e.id = i.enfermeiro_id</br>
+GROUP BY e.nome, e.CRE</br>
+HAVING COUNT(*) > 1;
+
+ 
+
+
 
