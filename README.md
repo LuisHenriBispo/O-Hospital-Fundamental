@@ -65,3 +65,22 @@ Inclua dados de dez profissionais de enfermaria. Associe cada internação a ao 
 Os dados de tipo de quarto, convênio e especialidade são essenciais para a operação do sistema e, portanto, devem ser povoados assim que o sistema for instalado.
 
 
+#
+ # A Ordem do Alterar  (Parte 4)
+ 
+Crie um script que adicione uma coluna “em_atividade” para os médicos, indicando se ele ainda está atuando no hospital ou não. 
+
+Crie um script para atualizar ao menos dois médicos como inativos e os demais em atividade.
+
+-- Adicionar coluna "em_atividade" na tabela de médicos
+ALTER TABLE medicos ADD COLUMN em_atividade VARCHAR(20);
+
+-- Atualizar o status dos médicos como "ativo" ou "inativo"</br>
+UPDATE medicos SET em_atividade = 'ativo' WHERE tipo_medico_id = 2;</br>
+UPDATE medicos SET em_atividade = 'inativo' WHERE tipo_medico_id = 1;</br>
+UPDATE medicos SET em_atividade = 'ativo' WHERE tipo_medico_id = 3;</br>
+
+-- Selecionar todos os registros da tabela tipo_medico</br>
+SELECT * FROM tipo_medico;
+
+
